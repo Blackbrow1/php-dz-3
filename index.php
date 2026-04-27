@@ -1,22 +1,22 @@
 <?php
-  function fullName(string $name, string $surname, string $lastname) 
-  {
-    $fullName = "Полное имя: " . mb_convert_case($name, MB_CASE_TITLE, "UTF-8") . " " . mb_convert_case($surname, MB_CASE_TITLE, "UTF-8") . " " . mb_convert_case($lastname, MB_CASE_TITLE, "UTF-8");
+function fullName(string $surname, string $name, string $patronymic) 
+{
+  $surname = mb_convert_case($surname, MB_CASE_TITLE, "UTF-8");
+  $name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
+  $patronymic = mb_convert_case($patronymic, MB_CASE_TITLE, "UTF-8");
+  
+  $fullName = "$name $patronymic $surname";
+  
+  $fio = "$surname " . mb_substr($name, 0, 1, "UTF-8") . "." . mb_substr($patronymic, 0, 1, "UTF-8") . ".";
+  
+  $surnameAndInitials = mb_substr($surname, 0, 1, "UTF-8") . 
+                        mb_substr($name, 0, 1, "UTF-8") . 
+                        mb_substr($patronymic, 0, 1, "UTF-8");
+  
+  echo "Полное имя: $fullName" . PHP_EOL;
+  echo "Фамилия и инициалы: $fio" . PHP_EOL;
+  echo "Аббревиатура: $surnameAndInitials";
+}
 
-    $fio = "Фамилия и инициалы: " . mb_convert_case($name, MB_CASE_TITLE, "UTF-8") . " " . mb_convert_case(mb_substr($surname, 0, 1, "UTF-8"), MB_CASE_TITLE, "UTF-8") . "." . mb_convert_case(mb_substr($lastname, 0, 1, "UTF-8"), MB_CASE_TITLE, "UTF-8") . ".";
-
-    $surnameAndInitials = "Аббревиатура: " . mb_convert_case(mb_substr($name, 0, 1, "UTF-8"), MB_CASE_TITLE, "UTF-8") . mb_convert_case(mb_substr($surname, 0, 1, "UTF-8"), MB_CASE_TITLE, "UTF-8") . mb_convert_case(mb_substr($lastname, 0, 1, "UTF-8"), MB_CASE_TITLE, "UTF-8");
-
-    echo $fullName;
-
-    echo '<br>';
-
-    echo $fio;
-
-    echo '<br>';
-
-    echo $surnameAndInitials;
-  }
-
-  fullName('иннокентий', 'петрович', 'макаров');
+fullName('макаров', 'иннокентий', 'петрович');
 ?>
