@@ -17,7 +17,7 @@ function formatFio(string $name, string $surname, string $patronymic)
   
   echo "Полное имя: '$fullName'" . PHP_EOL;
   echo "Фамилия и инициалы: '$surnameAndInitials'" . PHP_EOL;
-  echo "Аббревиатура: '$fio'" . ' \\';
+  echo "Аббревиатура: '$fio'";
 }
 
 formatFio('иван', 'иванов', 'иванович');
