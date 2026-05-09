@@ -1,24 +1,27 @@
 <?php
-function formatFio(string $name, string $surname, string $patronymic) 
-{
-  $surname = mb_convert_case($surname, MB_CASE_TITLE, "UTF-8");
-  $name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
-  $patronymic = mb_convert_case($patronymic, MB_CASE_TITLE, "UTF-8");
-  
-  $fullName = "$surname $name $patronymic";
-  
-  $surnameAndInitials = $surname . " " . 
-                        mb_substr($name, 0, 1, "UTF-8") . "." . 
-                        mb_substr($patronymic, 0, 1, "UTF-8") . ".";
-  
-  $fio = mb_substr($surname, 0, 1, "UTF-8") . 
-          mb_substr($name, 0, 1, "UTF-8") . 
-          mb_substr($patronymic, 0, 1, "UTF-8");
-  
-  echo "Полное имя: '$fullName'" . PHP_EOL;
-  echo "Фамилия и инициалы: '$surnameAndInitials'" . PHP_EOL;
-  echo "Аббревиатура: '$fio'";
+function mb_ucfirst($string) {
+    return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1);
 }
 
-formatFio('иван', 'иванов', 'иванович');
+function mb_ucwords($string) {
+    return mb_ucfirst(mb_strtolower($string));
+}
+
+$name = "иван";
+$surname = "иванов";
+$patronymic = "иванович";
+
+$fullname = mb_ucwords($surname) . " " . mb_ucwords($name) . " " . mb_ucwords($patronymic);
+
+$surnameAndInitials = mb_ucwords($surname) . " " . 
+                      mb_strtoupper(mb_substr($name, 0, 1)) . "." . 
+                      mb_strtoupper(mb_substr($patronymic, 0, 1)) . ".";
+
+$fio = mb_strtoupper(mb_substr($surname, 0, 1)) . 
+       mb_strtoupper(mb_substr($name, 0, 1)) . 
+       mb_strtoupper(mb_substr($patronymic, 0, 1));
+
+echo "Полное имя: '{$fullname}'\n";
+echo "Фамилия и инициалы: '{$surnameAndInitials}'\n";
+echo "Аббревиатура: '{$fio}'\n";
 ?>
